@@ -1,0 +1,114 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CCMS.Site" %>
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - Deerwalk CCMS</title>
+    <!---------------------------------------------------------------------->
+
+    <link type="text/css" rel="stylesheet" href="~/css/site.css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <!---------------------------------------------------------------------->
+    <%-- <asp:ContentPlaceHolder ID="head" runat="server" />--%>
+</head>
+<body>
+    <form id="frmMaster" runat="server">
+        <div class="content-wrapper">
+            <table class="header">
+                <tr class="table">
+                    <td>
+                        <div class="float-right" style="margin-left: 900px; background-color: #1c4877">
+                            <asp:ContentPlaceHolder ID="cpLogout" runat="server">
+                                <asp:LinkButton ID="btnLogout" runat="server" Text="Log Out" ForeColor="WhiteSmoke" OnClick="btnLogout_Click" Visible="true"></asp:LinkButton>
+                            </asp:ContentPlaceHolder>
+                            &nbsp;
+                        </div>
+                        <asp:Image ID="Logo" ImageUrl="~/Images/DWIT_header.JPG" runat="server" />
+                    </td>
+                </tr>
+            </table>
+            <table class="content-table">
+                <tr class="changing-content">
+                    <td>
+                        <asp:ContentPlaceHolder ID="menu" runat="server">
+                            <div id="navMenu">
+                                <ul id="top_menu">
+                                    <li>
+                                        <a>TimeEntry</a>
+                                        <ul class="inner-menu">
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkTimeEntry" runat="server" Visible="false"></asp:LinkButton></a></li>
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkEditTimeSheet" runat="server" Visible="false"></asp:LinkButton></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a>User</a>
+                                        <ul class="inner-menu">
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkAddUser" runat="server" Visible="false"></asp:LinkButton></a></li>
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkEditUser" runat="server" Visible="false"></asp:LinkButton></a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a>Faculty</a>
+                                        <ul class="inner-menu">
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkAddFacultyDetail" runat="server" Visible="false"></asp:LinkButton>
+                                            </a></li>
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkViewFaculty" runat="server" Visible="false"></asp:LinkButton>
+                                            </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton ID="lnkAddBatch" runat="server" Visible="false"></asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <a>Routine</a>
+                                        <ul class="inner-menu">
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkAddRoutine" runat="server" Visible="false"></asp:LinkButton>
+                                            </a></li>
+
+                                            <li><a>
+                                                <asp:LinkButton ID="lnkViewRoutine" runat="server" Visible="false"></asp:LinkButton>
+                                            </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton ID="lnkFacultyPage" runat="server" Visible="false"></asp:LinkButton>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="pageFrame">
+                        <asp:ContentPlaceHolder ID="pageContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="pageContent2" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <footer>
+                    &copy; <%: DateTime.Now.Year %> - Deerwalk Institute of Technology and Deerwalk Inc.
+                </footer>
+            </div>
+        </div>
+
+    </form>
+</body>
+</html>
+
