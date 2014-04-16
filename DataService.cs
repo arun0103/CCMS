@@ -79,7 +79,7 @@ namespace CCMS
             return result;
         }
 
-        
+
         public static string ReadDatabaseSingle(string query, SqlParameter[] parameter)
         {
             string result = String.Empty;
@@ -88,15 +88,27 @@ namespace CCMS
             {
                 command.Connection = Connection;
                 command.CommandType = CommandType.Text;
-
-                if (parameter != null)
+                command.Parameters.AddWithValue("@email",parameter[0].SqlValue);
+                try
                 {
-                    command.Parameters.AddRange(parameter);
-                }
-                Connection.Open();
-                result = Convert.ToString(command.ExecuteScalar());
-                Connection.Close();
 
+
+                    //if (parameter != null)
+                    //{
+                    //    command.Parameters.AddRange(parameter);
+                    //}
+                    Connection.Open();
+                    result = Convert.ToString(command.ExecuteScalar());
+                }
+                catch
+                {
+                    Console.WriteLine("Some exception Occured");
+                }
+                finally
+                {
+
+                    Connection.Close();
+                }
             }
 
             return result;

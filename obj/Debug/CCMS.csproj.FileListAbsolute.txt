@@ -58,3 +58,8 @@ C:\Users\currys\Desktop\CCMS 1.2 - Copy(arun)\CCMS\bin\CCMS.pdb
 C:\Users\currys\Desktop\CCMS 1.2 - Copy(arun)\CCMS\obj\Debug\CCMS.csprojResolveAssemblyReference.cache
 C:\Users\currys\Desktop\CCMS 1.2 - Copy(arun)\CCMS\obj\Debug\CCMS.dll
 C:\Users\currys\Desktop\CCMS 1.2 - Copy(arun)\CCMS\obj\Debug\CCMS.pdb
+A:\github\CCMS\bin\CCMS.dll
+A:\github\CCMS\bin\CCMS.pdb
+A:\github\CCMS\obj\Debug\CCMS.csprojResolveAssemblyReference.cache
+A:\github\CCMS\obj\Debug\CCMS.dll
+A:\github\CCMS\obj\Debug\CCMS.pdb

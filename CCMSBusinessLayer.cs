@@ -62,18 +62,13 @@ namespace CCMS
 
             cmd.Connection = conDatabase;
 
-
-
-
             try
             {
                 OpenConnection();
 
                 SqlDataReader sdr = cmd.ExecuteReader();
                 return sdr;
-
             }
-
             catch
             {
                 throw new Exception();
@@ -171,8 +166,8 @@ namespace CCMS
         public static bool isExistingUser(string email)
         {
 
-            string sqlQuery = "select userId from Users where email= @email";
-            SqlParameter[] parameter = new SqlParameter[6];
+            string sqlQuery = "select UserID from Users where UserEmail= @email";
+            SqlParameter[] parameter = new SqlParameter[1];
 
             parameter[0] = new SqlParameter("@email", email);
            
@@ -193,16 +188,16 @@ namespace CCMS
              
             int inserted = 0;
             user.Password = GetRandomPassword(5);
-            string sqlQuery = "INSERT INTO users(userEmail,Password,FirstName,LastName,active,role) VALUES (@userEmail,@password,@firstName,@lastName,@Active,@Role)";
-            SqlParameter[] parameter = new SqlParameter[6];
+            string sqlQuery = "INSERT INTO users(userEmail,Password,FirstName,LastName,active,role,Contact) VALUES (@userEmail,@password,@firstName,@lastName,@Active,@Role,@Contact)";
+            SqlParameter[] parameter = new SqlParameter[7];
                    
             parameter[0] = new SqlParameter("@Role", user.Role);
-            parameter[1] = new SqlParameter("@FirstName", user.FirstName);
-            parameter[2] = new SqlParameter("@LastName", user.LastName);
-            parameter[3] = new SqlParameter("@Email", user.Email);
+            parameter[1] = new SqlParameter("@firstName", user.FirstName);
+            parameter[2] = new SqlParameter("@lastName", user.LastName);
+            parameter[3] = new SqlParameter("@userEmail", user.Email);
             parameter[4] = new SqlParameter("@Contact", user.Contact);
             parameter[5] = new SqlParameter("@Active", user.Active);
-            parameter[5] = new SqlParameter("@password", user.Password);
+            parameter[6] = new SqlParameter("@password", user.Password);
             inserted = DataService.InsertIntoDatabase(sqlQuery, parameter);
 
 
@@ -211,10 +206,6 @@ namespace CCMS
                 SendGeneratedPassword(user.Email, user.Password, user.FirstName);
             }
             return inserted;
-
-
-        
-
         }
 
         #endregion
@@ -240,7 +231,6 @@ namespace CCMS
 
         public static void SendGeneratedPassword(string email, string password, string fname)
         {
-
             string college = "DWIT";
             MailMessage message = new MailMessage();
             MailAddress Sender = new MailAddress(ConfigurationManager.AppSettings["smtpUser"]);
@@ -261,24 +251,16 @@ namespace CCMS
             message.Body = "Dear " + fname + "," + Environment.NewLine + Environment.NewLine + "Welcome to CCMS. Your password for login is: " + password + Environment.NewLine + Environment.NewLine + "Thanks," + Environment.NewLine + college;
 
             smtp.Send(message);
-
-
         }
 
         public static DataTable GetUsers(string role)
-
         {
-            
             string query = "select * from Users  where role = @role ";
             SqlParameter[] param = new SqlParameter[1];
             param[0] = new SqlParameter("@role",role);
 
             DataTable Users = DataService.ReadDB( query,param);
             return Users;
-
- 
-            
-
         }
 
     }

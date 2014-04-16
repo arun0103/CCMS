@@ -62,11 +62,8 @@ namespace CCMS
                         section_drp.SelectedIndex = 3;
                         section_drp.Enabled = false;
                     }
-
-
                     dr.Close();
                 }
-
             }
             catch
             {
@@ -77,7 +74,6 @@ namespace CCMS
                 con.Close();
             }
             Semester_drp_SelectedIndexChanged(sender, e);
-
         }
 
         public void BindClassDropdown()
@@ -98,13 +94,13 @@ namespace CCMS
         }
         public void BindFacultyDropdown()
         {
-            string command = "Select Fid, FirstName + ' ' + LastName as FacultyName from faculty";
+            string command = "Select UserID, FirstName + ' ' + LastName as FacultyName from Users where role = 'Faculty'";
             DataTable FacultyTable = new DataTable();
             objDataService = new DataService();
 
             FacultyTable = objDataService.GetDataWithoutParameter(command);
 
-            FacultyList.DataValueField = "Fid";
+            FacultyList.DataValueField = "UserID";
             FacultyList.DataTextField = "FacultyName";
             FacultyList.DataSource = FacultyTable;
             FacultyList.DataBind();
@@ -127,21 +123,7 @@ namespace CCMS
             Semester_drp.Items.Insert(0, new ListItem("--- Select Semester ---", "0"));
 
         }
-        //public int findFid(string FacultyName)
-        //{
-
-        //    connectionString = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
-        //    string query = "Select FId from faculty where FirstName + ' ' + LastName = @FacultyName";
-        //    SqlCommand cmd = new SqlCommand { CommandText = query };
-        //    cmd.Parameters.AddWithValue("@FacultyName", FacultyName);
-        //    string[] parameter = new string[] { FacultyName };
-
-        //    DataService ds1 = new DataService();
-
-        //    DataTable result = ds1.GetDataWithParameters(cmd);
-        //    int FacultyID = Convert.ToInt32(result.Rows[0]["FId"].ToString());
-        //    return FacultyID;
-        //}
+        
         protected void RoutineAddBtn_Click(object sender, EventArgs e)
         {
             RFV_ClassList.Enabled = true;
@@ -151,12 +133,7 @@ namespace CCMS
             RFV_subjectlist_drp.Enabled = true;
             RFV_YearList.Enabled = true;
             Page.Validate();
-            //if (Page.IsValid)
-            //{
-                
-            //    //Reset();
-
-            //}
+          
 
             if (ClassList.SelectedIndex != 0 && FacultyList.SelectedIndex != 0 && section_drp.SelectedIndex != 0 && Semester_drp.SelectedIndex != 0 && subjectlist_drp.SelectedIndex != 0 && YearList.SelectedIndex != 0)
             {
@@ -178,7 +155,7 @@ namespace CCMS
                     ScriptManager.RegisterStartupScript(this, GetType(), "Success !! ", "alert('Routine details has been added.');", true);
                 }
                 connectionString = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
-                string sqlQuery = "select routine.routineId, faculty.FirstName + ' ' + faculty.LastName as FacultyName from routine inner join faculty on routine.Fid = faculty.FId";
+                string sqlQuery = "select routine.routineId, Users.FirstName + ' ' + Users.LastName as FacultyName from routine inner join Users on routine.Fid = Users.UserID";
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     
@@ -193,35 +170,6 @@ namespace CCMS
                 mcon = (ContentPlaceHolder)Master.FindControl("pageContent2");
                 mcon.Visible = true;
             }
-                //DataService objDataService = new DataService();
-                //string sqlQuery1 = "INSERT INTO routine(Fid,BatchID,EnrollYear, Semester, SubjectID, SectionName) VALUES (@Fid,@BatchID,@yeartb,@Semester,@SubjectID,@SectionName)";
-
-                ////int FacultyID = findFid(FacultyList.Text);
-                //SqlCommand dataCommand1 = new SqlCommand();
-                ////dataCommand1.CommandType = CommandType.Text;
-                ////dataCommand1.CommandText = findFid;
-
-                //dataCommand1.CommandType = CommandType.Text;
-                //dataCommand1.CommandText = sqlQuery1;
-
-                //dataCommand1.Parameters.AddWithValue("@Fid", FacultyList.SelectedItem.Value);
-                //dataCommand1.Parameters.AddWithValue("@BatchID", BatchList.SelectedItem.Value);
-                //dataCommand1.Parameters.AddWithValue("@yeartb", YearList.SelectedItem.Text);
-                //dataCommand1.Parameters.AddWithValue("@Semester", Semester_drp.SelectedItem.Text);
-                //dataCommand1.Parameters.AddWithValue("@SubjectID", subjectlist_drp.SelectedItem.Value);
-                //dataCommand1.Parameters.AddWithValue("@SectionName", section_drp.SelectedItem.Text);
-
-                /* Need to modify .... Donot delete this comment*/
-                /************** Warning ******************************/
-                //int affectedRowsOfRoutine = objDataService.InsertIntoDatabase(dataCommand1);
-
-                //if (affectedRowsOfRoutine > 0)
-                //{
-                //    //updateMsg.Visible = true;
-                //    ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Routine Details has been added.');", true);
-                //}
-            
-
 
         }
         public void clear()
@@ -249,8 +197,6 @@ namespace CCMS
         {
             clear();
         }
-
-       // public string connectionString1 { get; set; }
 
         protected void Semester_drp_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -280,3 +226,46 @@ namespace CCMS
 
     }
 }
+
+//DataService objDataService = new DataService();
+//string sqlQuery1 = "INSERT INTO routine(Fid,BatchID,EnrollYear, Semester, SubjectID, SectionName) VALUES (@Fid,@BatchID,@yeartb,@Semester,@SubjectID,@SectionName)";
+
+////int FacultyID = findFid(FacultyList.Text);
+//SqlCommand dataCommand1 = new SqlCommand();
+////dataCommand1.CommandType = CommandType.Text;
+////dataCommand1.CommandText = findFid;
+
+//dataCommand1.CommandType = CommandType.Text;
+//dataCommand1.CommandText = sqlQuery1;
+
+//dataCommand1.Parameters.AddWithValue("@Fid", FacultyList.SelectedItem.Value);
+//dataCommand1.Parameters.AddWithValue("@BatchID", BatchList.SelectedItem.Value);
+//dataCommand1.Parameters.AddWithValue("@yeartb", YearList.SelectedItem.Text);
+//dataCommand1.Parameters.AddWithValue("@Semester", Semester_drp.SelectedItem.Text);
+//dataCommand1.Parameters.AddWithValue("@SubjectID", subjectlist_drp.SelectedItem.Value);
+//dataCommand1.Parameters.AddWithValue("@SectionName", section_drp.SelectedItem.Text);
+
+/* Need to modify .... Donot delete this comment*/
+/************** Warning ******************************/
+//int affectedRowsOfRoutine = objDataService.InsertIntoDatabase(dataCommand1);
+
+//if (affectedRowsOfRoutine > 0)
+//{
+//    //updateMsg.Visible = true;
+//    ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Routine Details has been added.');", true);
+//}
+//public int findFid(string FacultyName)
+//{
+
+//    connectionString = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
+//    string query = "Select FId from faculty where FirstName + ' ' + LastName = @FacultyName";
+//    SqlCommand cmd = new SqlCommand { CommandText = query };
+//    cmd.Parameters.AddWithValue("@FacultyName", FacultyName);
+//    string[] parameter = new string[] { FacultyName };
+
+//    DataService ds1 = new DataService();
+
+//    DataTable result = ds1.GetDataWithParameters(cmd);
+//    int FacultyID = Convert.ToInt32(result.Rows[0]["FId"].ToString());
+//    return FacultyID;
+//}

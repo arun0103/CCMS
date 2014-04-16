@@ -38,7 +38,6 @@ namespace CCMS
            SqlCommand CheckUser = new SqlCommand(cmdStr, con);
             con.Open();
 
-
             object UserID = CheckUser.ExecuteScalar();
             if (UserID != null)
             {
@@ -62,12 +61,8 @@ namespace CCMS
 
                             Session["UserId"] = UserID;
                             Session["Role"] = userDetail.Rows[0][1].ToString();
-                            Response.Redirect("TimeEntry.aspx");
-                            
-
-                            
+                            Response.Redirect("TimeEntry.aspx"); 
                         }
-                        
                     }
                     else
                     {
@@ -76,8 +71,6 @@ namespace CCMS
                         lblMessage.Text = "Invalid password .........!!";
                     }
                     con.Close();
-
-                   
                 }
             }
             else
@@ -86,14 +79,10 @@ namespace CCMS
                 lblMessage.ForeColor = Color.Red;
                 lblMessage.Text = "Invalid userName.....!!";
 
-            }
-
-            
+            }            
         }
-
     }
-    
-    }
+}
         
 
       

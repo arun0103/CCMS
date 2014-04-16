@@ -65,13 +65,13 @@ namespace MyCCMS
             {
                 if (CCMSBusinessLayer.isExistingUser(txtEmail.Text))
                 {
-                   Save();
+                   
                   // BindGrid();
                 }
 
                 else
                 {
-                   // ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Record already exist. ');", true);
+                    Save();   
                 }
                 Reset();
            

@@ -109,8 +109,8 @@
             </table>
         </div>
     </fieldset>
-    
 </asp:Content>
+
 <asp:Content ID="FacultyRoutine" ContentPlaceHolderID="pageContent2" runat="server" Visible="false">
     <fieldset>
         <legend>List Of Classes</legend>

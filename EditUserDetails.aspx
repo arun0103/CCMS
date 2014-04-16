@@ -85,6 +85,7 @@
                                     <asp:ListItem>--- Select ---</asp:ListItem>
                                     <asp:ListItem Text="User" Value="User"></asp:ListItem>
                                     <asp:ListItem Text="Admin" Value="Admin"></asp:ListItem>
+                                    <asp:ListItem Text="Faculty" Value="Faculty"></asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                         </tr>
